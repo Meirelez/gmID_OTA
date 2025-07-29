@@ -1,0 +1,8 @@
+setup.py
+TSOTA/__init__.py
+TSOTA/core.py
+TSOTA.egg-info/PKG-INFO
+TSOTA.egg-info/SOURCES.txt
+TSOTA.egg-info/dependency_links.txt
+TSOTA.egg-info/requires.txt
+TSOTA.egg-info/top_level.txt

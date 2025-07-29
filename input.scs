@@ -1,0 +1,115 @@
+// Point Netlist Generated on: Jul 23 10:38:17 2025
+// Generated for: spectre
+// Design Netlist Generated on: Jul 23 10:38:17 2025
+// Design library name: 2SOTA
+// Design cell name: tb_teste
+// Design view name: schematic
+simulator lang=spectre
+include "ade_e.scs"
+global 0 vdd!
+parameters temperature=27
+include "/home/cadmgr/libs/tsmc-065-lp-rf/CM-SP-007-K4-1.7A2/tsmcN65/../models/spectre/toplevel.scs" section=tt_lib
+
+// Library name: 2SOTA
+// Cell name: Ideal_opamp
+// View name: schematic
+subckt Ideal_opamp Out in\+ in\-
+    E0 (Out 0 in\+ in\-) vcvs gain=100000 min=0 max=5
+ends Ideal_opamp
+// End of subcircuit definition.
+
+// Library name: 2SOTA
+// Cell name: Vb2_tb
+// View name: schematic
+subckt Vb2_tb VDD VSS Vin Vip Von Vop
+    L3 (net10 Vop) inductor l=1K
+    L2 (Von net7) inductor l=1K
+    L1 (net8 Vo1p) inductor l=1K
+    L0 (Vo1n net6) inductor l=1K
+    R5 (net13 vb2) resistor r=1K
+    R4 (net15 vb1) resistor r=1K
+    R3 (net5 net10) resistor r=1M
+    R2 (net7 net5) resistor r=1M
+    Rz1 (net2 Von) resistor r=247
+    Rz2 (net4 Vop) resistor r=247
+    R1 (net9 net8) resistor r=1M
+    R0 (net6 net9) resistor r=1M
+// === TSOTA_M1 ===
+    M1a (Vo1n Vip net19 net19) pch_mac l=150.0n w=48.4u multi=1 nf=1 \
+        sd=200n ad=8.47e-12 as=8.47e-12 pd=97.15u ps=97.15u nrd=0.00206612 \
+        nrs=0.00206612 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1      
+    M1b (Vo1p Vin net19 net19) pch_mac l=150.0n w=48.4u multi=1 nf=1 \
+        sd=200n ad=8.47e-12 as=8.47e-12 pd=97.15u ps=97.15u nrd=0.00206612 \
+        nrs=0.00206612 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1
+// === TSOTA_M2 ===
+    M2a (Von Vo1p VSS VSS) nch_mac l=200n w=120.3u multi=1 nf=1 sd=200n \
+        ad=2.10525e-11 as=2.10525e-11 pd=240.95u ps=240.95u \
+        nrd=0.000831255 nrs=0.000831255 sa=175.00n sb=175.00n sca=0 scb=0 \
+        scc=0 sigma=1 
+    M2b (Vop Vo1n VSS VSS) nch_mac l=200n w=120.3u multi=1 nf=1 sd=200n \
+        ad=2.10525e-11 as=2.10525e-11 pd=240.95u ps=240.95u \
+        nrd=0.000831255 nrs=0.000831255 sa=175.00n sb=175.00n sca=0 scb=0 \
+        scc=0 sigma=1       
+// === TSOTA_M3 ===
+    M3a (Vo1n vb1 VSS VSS) nch_mac l=200n w=32.3u multi=1 nf=1 sd=200n \
+        ad=5.6525e-12 as=5.6525e-12 pd=64.95u ps=64.95u nrd=0.00309597 \
+        nrs=0.00309597 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1
+    M3b (Vo1p vb1 VSS VSS) nch_mac l=200n w=32.3u multi=1 nf=1 sd=200n \
+        ad=5.6525e-12 as=5.6525e-12 pd=64.95u ps=64.95u nrd=0.00309597 \
+        nrs=0.00309597 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1
+// === TSOTA_M4 ===
+    M4a (Von vb2 VDD VDD) pch_mac l=150.0n w=22.1u multi=1 nf=1 sd=200n \
+        ad=3.8675e-12 as=3.8675e-12 pd=44.55u ps=44.55u nrd=0.00452489 \
+        nrs=0.00452489 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1  
+    M4b (Vop vb2 VDD VDD) pch_mac l=150.0n w=22.1u multi=1 nf=1 sd=200n \
+        ad=3.8675e-12 as=3.8675e-12 pd=44.55u ps=44.55u nrd=0.00452489 \
+        nrs=0.00452489 sa=175.00n sb=175.00n sca=0 scb=0 scc=0 sigma=1
+    I8 (VDD net19) isource dc=314u type=dc
+    V6 (net11 0) vsource dc=600.0m type=dc
+    VB2 (net3 0) vsource dc=460.0m type=dc
+    I10 (net13 net5 net11) Ideal_opamp
+    I7 (net15 net9 net3) Ideal_opamp
+    C3 (net5 0) capacitor c=1
+    C2 (net9 0) capacitor c=1
+    C1 (vb2 0) capacitor c=1
+    C0 (vb1 0) capacitor c=1
+    Cadd2 (Vo1p Von) capacitor c=41.7f
+    Cc1 (Vo1p net2) capacitor c=375f
+    Cn2 (Vin Vo1n) capacitor c=1p
+    Cn1 (Vip Vo1p) capacitor c=1p
+    Cadd1 (Vo1n Vop) capacitor c=41.7f
+    Cc2 (Vo1n net4) capacitor c=375f
+ends Vb2_tb
+// End of subcircuit definition.
+
+// Library name: analogLib
+// Cell name: ideal_balun
+// View name: schematic
+subckt ideal_balun d c p n
+    K0 (d 0 p c) transformer n1=2
+    K1 (d 0 c n) transformer n1=2
+ends ideal_balun
+// End of subcircuit definition.
+
+// Library name: 2SOTA
+// Cell name: tb_teste
+// View name: schematic
+I0 (vdd! 0 net2 net5 Von Vop) Vb2_tb
+V0 (net10 0) vsource mag=1 type=dc
+Vcmm (net11 0) vsource dc=600.0m type=dc
+V2 (vdd! 0) vsource dc=1.2 type=dc
+I1 (net10 net11 net2 net5) ideal_balun
+CL\- (Vop 0) capacitor c=99f
+CL\+ (Von 0) capacitor c=99f
+simulatorOptions options psfversion="1.4.0" reltol=1e-3 vabstol=1e-6 \
+    iabstol=1e-12 temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
+    sensfile="../psf/sens.output" checklimitdest=psf 
+ac ac start=0.1 stop=1G dec=100 annotate=status 
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+saveOptions options save=allpub
